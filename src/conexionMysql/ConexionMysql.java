@@ -52,6 +52,7 @@ public class ConexionMysql implements IConexionAbstract {
                 conn.close();
                 conn = null;
                 instance = null;
+                System.out.println("ee");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
