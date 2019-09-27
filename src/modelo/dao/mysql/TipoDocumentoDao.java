@@ -122,7 +122,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
         } catch (SQLException e) {
             throw new NotAll("No se encontraron registros de tipos de documentos");
         } finally{
-            //cerrarConexion();
+            cerrarConexion();
         }
         return tdList;
     }
