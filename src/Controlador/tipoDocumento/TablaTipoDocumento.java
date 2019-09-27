@@ -2,7 +2,10 @@ package Controlador.tipoDocumento;
 
 import excepcion.NotAll;
 import interfaces.ICrud;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import modelo.entidad.TipoDocumento;
 
@@ -16,7 +19,10 @@ public class TablaTipoDocumento extends AbstractTableModel {
     private List<TipoDocumento> listaTipoDocumento;
 
     public TablaTipoDocumento(ICrud daoTipoDocumento) {
-        this.daoTipoDocumento = daoTipoDocumento;
+        try {
+            this.daoTipoDocumento = daoTipoDocumento;
+            update();
+        } catch (NotAll ex) {listaTipoDocumento = new ArrayList<>();}
     }
 
     public void update() throws NotAll {
@@ -30,16 +36,18 @@ public class TablaTipoDocumento extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-       return 2;    
+       return 3;    
     }
 
     @Override
     public String getColumnName(int column) {
         switch(column){
-            case 1:
+            case 0:
                 return "IdTipoDocumento";
-            case 2:
+            case 1:
                 return "Tipo";
+            case 2:
+                return "Abreviatura";
         }
         return "";
     }
@@ -48,10 +56,12 @@ public class TablaTipoDocumento extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         TipoDocumento tipo = listaTipoDocumento.get(rowIndex);
         switch(columnIndex){
-            case 1:
+            case 0:
                 return tipo.getIdTipoDocumento();
-            case 2:
+            case 1:
                 return tipo.getTipo();
+            case 2:
+                return tipo.getAbreviatura();
         }    
         return null;
     }

@@ -8,6 +8,7 @@ public class TipoDocumento {
     private int idTipoDocumento;
     private String tipo;
     private byte estado;
+    private String abreviatura;
 
     public TipoDocumento(int idTipoDocumento, String tipo, byte estado) {
         this.idTipoDocumento = idTipoDocumento;
@@ -23,6 +24,20 @@ public class TipoDocumento {
     public TipoDocumento(String tipo, byte estado) {
         this.tipo = tipo;
         this.estado = estado;
+    }
+
+    public TipoDocumento(int idTipoDocumento, String tipo, String abreviatura) {
+        this.idTipoDocumento = idTipoDocumento;
+        this.tipo = tipo;
+        this.abreviatura = abreviatura;
+    }
+    
+    public String getAbreviatura() {
+        return abreviatura;
+    }
+
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
     }
     
     public int getIdTipoDocumento() {

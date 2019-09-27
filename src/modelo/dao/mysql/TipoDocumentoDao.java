@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,16 +105,16 @@ public class TipoDocumentoDao implements ITipoDocumento {
     
     @Override
     public List<TipoDocumento> Listar() throws NotAll {
-        List<TipoDocumento> tdList = null;
+        List<TipoDocumento> tdList = new ArrayList<>();
         conexion = ConexionMysql.GetInstance();
         Connection con = conexion.conectar();
         try {
             pr = con.prepareStatement("select * from vTipoDocumento");
             rs = pr.executeQuery();
             if(rs.next()){
-                tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2)));
+                tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2),rs.getString(3)));
                 while(rs.next()){
-                    tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2)));
+                    tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2),rs.getString(3)));
                 }
             }else{
                 throw new NotAll("No se encontraron registros de tipos de documentos");
@@ -121,7 +122,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
         } catch (SQLException e) {
             throw new NotAll("No se encontraron registros de tipos de documentos");
         } finally{
-            cerrarConexion();
+            //cerrarConexion();
         }
         return tdList;
     }

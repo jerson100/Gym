@@ -16,7 +16,7 @@ public class ConexionMysql implements IConexionAbstract {
     private static ConexionMysql instance;
     private static final String URL = "jdbc:mysql://localhost:3306/gym";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String USER = "";
+    private static final String USER = "root";
     private static final String PASS = "";
 
     private ConexionMysql() {
@@ -51,6 +51,7 @@ public class ConexionMysql implements IConexionAbstract {
             if(!conn.isClosed()){
                 conn.close();
                 conn = null;
+                instance = null;
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);

@@ -17,6 +17,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         ESCRITORIO = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mnuItemPais = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -33,6 +34,10 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        mnuItemPais.setText("Pais");
+        jMenu1.add(mnuItemPais);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -60,5 +65,6 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    public javax.swing.JMenuItem mnuItemPais;
     // End of variables declaration//GEN-END:variables
 }
