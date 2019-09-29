@@ -179,12 +179,12 @@ public class ControladorTipoDocumento implements IController {
         String msg = "";
         if (!JeValidatorLetter.isLetter(vista.txtTipo.getText())) {
             msg = "El tipo de documento no es válido, solo se admiten letras";
-        } else if (vista.txtTipo.getText().length() > App.MAX_NOMBRE_PAIS) {
-            msg = "El tipo de documento solo debe contener menos de: " + App.MAX_NOMBRE_PAIS;
+        } else if (vista.txtTipo.getText().length() > App.MAX_NOMBRE_TIPODOCUMENTO) {
+            msg = "El tipo de documento solo debe contener menos de: " + App.MAX_NOMBRE_TIPODOCUMENTO;
         } else if (!JeValidatorLetter.isLetter(vista.txtAbreviatura.getText())) {
             msg = "La abreviatura no es válido, solo se admiten letras";
-        } else if (vista.txtAbreviatura.getText().length() > App.MAX_ABREVIATURA_PAIS) {
-            msg = "El tipo de documento solo debe contener menos de: " + App.MAX_ABREVIATURA_PAIS;
+        } else if (vista.txtAbreviatura.getText().length() > App.MAX_ABREVIATURA_TIPODOCUMENTO) {
+            msg = "El tipo de documento solo debe contener menos de: " + App.MAX_ABREVIATURA_TIPODOCUMENTO;
         }
 
         if (!msg.isEmpty()) {
