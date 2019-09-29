@@ -9,13 +9,12 @@ public class VistaTipoDocumento extends javax.swing.JInternalFrame {
     public VistaTipoDocumento() {
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtBuscarTipo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTipoDocumento = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -28,10 +27,12 @@ public class VistaTipoDocumento extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
-        txtTipo = new javax.swing.JTextField();
-        txtAbr = new javax.swing.JTextField();
+        txtId = new util.JeTextPlaceHolder();
+        txtTipo = new util.JeTextPlaceHolder();
+        txtAbreviatura = new util.JeTextPlaceHolder();
+        txtBuscarTipo = new util.JeTextPlaceHolder();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -99,10 +100,18 @@ public class VistaTipoDocumento extends javax.swing.JInternalFrame {
         jLabel5.setText("abreviatura:");
 
         txtId.setEnabled(false);
+        txtId.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txtTipo.setEnabled(false);
+        txtTipo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTipo.setTextoPlaceHolder("Ingrese el tipo");
 
-        txtAbr.setEnabled(false);
+        txtAbreviatura.setEnabled(false);
+        txtAbreviatura.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtAbreviatura.setTextoPlaceHolder("Ingrese la abreviatura");
+
+        txtBuscarTipo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtBuscarTipo.setTextoPlaceHolder("Ingrese el tipo a buscar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,8 +141,8 @@ public class VistaTipoDocumento extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(txtBuscarTipo)
+                .addGap(39, 39, 39)
+                .addComponent(txtBuscarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
@@ -143,9 +152,9 @@ public class VistaTipoDocumento extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtId)
-                    .addComponent(txtTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                    .addComponent(txtAbr))
+                    .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtAbreviatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
@@ -154,23 +163,23 @@ public class VistaTipoDocumento extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBuscarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBuscarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAbr, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAbreviatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,9 +211,9 @@ public class VistaTipoDocumento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tblTipoDocumento;
-    public javax.swing.JTextField txtAbr;
-    public javax.swing.JTextField txtBuscarTipo;
-    public javax.swing.JTextField txtId;
-    public javax.swing.JTextField txtTipo;
+    public util.JeTextPlaceHolder txtAbreviatura;
+    public util.JeTextPlaceHolder txtBuscarTipo;
+    public util.JeTextPlaceHolder txtId;
+    public util.JeTextPlaceHolder txtTipo;
     // End of variables declaration//GEN-END:variables
 }
