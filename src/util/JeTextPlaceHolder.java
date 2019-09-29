@@ -87,6 +87,18 @@ public final class JeTextPlaceHolder extends JTextField implements FocusListener
         return colorPlaceHolder;
     }
 
+    public void repintarPlaceHolder(){
+        holderActive = true;
+        setForeground(colorPlaceHolder);
+        holderActive = true;
+        setText(textoPlaceholder);
+    }
+    
+    public void repintarTextoNormal(){
+        holderActive = false;
+        setForeground(colorNormal);
+    }
+    
     /**
      * Establece el color del placeholder
      * @param colorPlaceHolder  <b>Color</b> Color del placeHolder

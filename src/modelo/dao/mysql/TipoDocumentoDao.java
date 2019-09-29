@@ -37,13 +37,14 @@ public class TipoDocumentoDao implements ITipoDocumento {
         conexion = ConexionMysql.GetInstance();
         Connection con = conexion.conectar();
         try {
-            ca = con.prepareCall("call sp_insert_tipoDocumento(?)");
+            ca = con.prepareCall("call ps_insert_tipoDocumento(?,?)");
             ca.setString(1, obj.getTipo());
+            ca.setString(2, obj.getAbreviatura());
             if (ca.executeUpdate() == 0) {
                 throw new NotCreate("No se pudo crear el tipo de documento");
             }
         } catch (SQLException e) {
-            throw new NotCreate("No se pudo crear el tipo de documento");
+            throw new NotCreate("No se pudo crear el tipo de documento: "+e.getMessage());
         } finally {
             cerrarConexion();
         }
@@ -59,11 +60,14 @@ public class TipoDocumentoDao implements ITipoDocumento {
             pr.setInt(1, id);
             rs = pr.executeQuery();
             if (rs.next()) {
-                td = new TipoDocumento(rs.getInt(1), rs.getString(2));
+                td = new TipoDocumento(rs.getInt(1), rs.getString(2),rs.getString(3));
             } else {
-                throw new NotRead("No se encontró el tipo de documento");
+                throw new NotRead("No se encontró el tipo de documento: ");
             }
         } catch (SQLException e) {
+             throw new NotRead("No se encontró el tipo de documento: "+e.getMessage());
+        } finally{
+            cerrarConexion();
         }
         return td;
     }
@@ -73,14 +77,15 @@ public class TipoDocumentoDao implements ITipoDocumento {
         conexion = ConexionMysql.GetInstance();
         Connection con = conexion.conectar();
         try {
-            ca = con.prepareCall("call sp_update_tipoDocumento(?,?)");
+            ca = con.prepareCall("call ps_update_tipoDocumento(?,?,?)");
             ca.setInt(1, obj.getIdTipoDocumento());
             ca.setString(2, obj.getTipo());
+            ca.setString(3, obj.getAbreviatura());
             if (ca.executeUpdate() == 0) {
                 throw new NotUpdate("No se pudo actualizar el tipo de documento");
             }
         } catch (SQLException e) {
-            throw new NotUpdate("No se pudo actualizar el tipo de documento");
+            throw new NotUpdate("No se pudo actualizar el tipo de documento: "+e.getMessage());
         } finally {
             cerrarConexion();
         }
@@ -91,13 +96,13 @@ public class TipoDocumentoDao implements ITipoDocumento {
         conexion = ConexionMysql.GetInstance();
         Connection con = conexion.conectar();
         try {
-            ca = con.prepareCall("call sp_delete_tipoDocumento(?)");
+            ca = con.prepareCall("call ps_delete_tipoDocumento(?)");
             ca.setInt(1, id);
             if (ca.executeUpdate() == 0) {
                 throw new NotDelete("No se pudo eliminar el tipo de documento");
             }
         } catch (SQLException e) {
-            throw new NotDelete("No se pudo eliminar el tipo de documento");
+            throw new NotDelete("No se pudo eliminar el tipo de documento: "+e.getMessage());
         } finally {
             cerrarConexion();
         }

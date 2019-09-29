@@ -33,6 +33,7 @@ public class VistaTipoDocumento extends javax.swing.JInternalFrame {
         txtBuscarTipo = new util.JeTextPlaceHolder();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -79,13 +80,16 @@ public class VistaTipoDocumento extends javax.swing.JInternalFrame {
         btnNuevo.setText("Nuevo");
 
         btnGrabar.setText("Grabar");
+        btnGrabar.setEnabled(false);
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
         btnCancelar.setPreferredSize(new java.awt.Dimension(74, 23));
 
         btnEditar.setText("Editar");
 
         btnBorrar.setText("Borrar");
+        btnBorrar.setEnabled(false);
 
         btnSalir.setText("Salir");
         btnSalir.setPreferredSize(new java.awt.Dimension(74, 23));

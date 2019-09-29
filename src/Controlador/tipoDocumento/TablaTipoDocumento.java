@@ -4,8 +4,6 @@ import excepcion.NotAll;
 import interfaces.ICrud;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import modelo.entidad.TipoDocumento;
 
@@ -24,9 +22,20 @@ public class TablaTipoDocumento extends AbstractTableModel {
             update();
         } catch (NotAll ex) {listaTipoDocumento = new ArrayList<>();}
     }
-
+    
+    public void remove(){
+        listaTipoDocumento.clear();
+    }
+ 
     public void update() throws NotAll {
         listaTipoDocumento = daoTipoDocumento.Listar();
+    }
+    
+    public void removeData(TipoDocumento t){
+        int index = listaTipoDocumento.indexOf(t);
+        if(index!=-1){
+            listaTipoDocumento.remove(t);
+        }
     }
     
     @Override
