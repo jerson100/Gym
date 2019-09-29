@@ -10,9 +10,9 @@ import javax.swing.JButton;
 
 /**
  *
- * @author RojeruSan
+ * @author Jerson
  */
-public class MiButton extends JButton implements MouseListener{
+public class MyButton extends JButton implements MouseListener{
 
     private Color colorHover = new Color(153,0,0);
     private Color colorPressed = new Color(0,0,0);
@@ -22,7 +22,7 @@ public class MiButton extends JButton implements MouseListener{
     private Color colorTextPressed = new Color(255, 255, 255);
     private Color colorTextNormal = new Color(255, 255, 255);
     
-    public MiButton() {
+    public MyButton() {
         this.setBorder(null);
         this.setContentAreaFilled(false);
         this.setOpaque(true);
