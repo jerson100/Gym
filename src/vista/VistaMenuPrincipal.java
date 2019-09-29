@@ -29,7 +29,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         ESCRITORIO.setLayout(ESCRITORIOLayout);
         ESCRITORIOLayout.setHorizontalGroup(
             ESCRITORIOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ESCRITORIOLayout.createSequentialGroup()
+            .addGroup(ESCRITORIOLayout.createSequentialGroup()
                 .addContainerGap(350, Short.MAX_VALUE)
                 .addComponent(jeHour2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
