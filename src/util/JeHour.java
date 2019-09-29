@@ -28,20 +28,18 @@ public class JeHour extends JLabel{
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                while (true) {
-                    try {
-                        setText("<html>"+
-                                "<body style='text-align:center'>"+
-                                    FORMAT.format(new Date())+"<br>"+
-                                    AUTHOR+
-                                "</body></html>");
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex) {}
-                }
+                try {
+                    setText("<html>"+
+                        "<body style='text-align:center'>"+
+                            FORMAT.format(new Date())+"<br>"+
+                            AUTHOR+
+                        "</body></html>");
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {}
             }
         };
         
-        timer.schedule(task, 0);
+        timer.schedule(task, 0,1000);
         
     }
 
