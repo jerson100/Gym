@@ -22,4 +22,14 @@ public interface ICrud<T> {
     void eliminar(int id) throws NotDelete;
 
     List<T> Listar() throws NotAll;
+    
+    List<T> ListarCondicion(String txt) throws NotAll;
+    int allTiposDocumentos();
+    
+    List<T> Listar(int i,int f) throws NotAll;
+    
+    int allTiposDocumentosSearch(String txt);
+    
+    List<T> ListarCondicion(String like,int i,int c) throws NotAll;
+    
 }

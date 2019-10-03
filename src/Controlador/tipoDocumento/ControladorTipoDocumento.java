@@ -10,6 +10,8 @@ import interfaces.IController;
 import interfaces.ICrud;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JInternalFrame;
@@ -40,21 +42,20 @@ public class ControladorTipoDocumento implements IController {
         vista = new VistaTipoDocumento();
         vista.txtBuscarTipo.repintarPlaceHolder();
     }
-
-    
     
     @Override
     public void open() {
         vista.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         modeloTabla = new TablaTipoDocumento(daoTipoDocumento);
+        System.out.println("dww");
         vista.tblTipoDocumento.setModel(modeloTabla);
-        try {
-            modeloTabla.update();
-        } catch (NotAll ex) {
-        }//si queremos imprimir algo por si no hay registros
+        modeloTabla.updateAll();
+        
+        pintarLabelsBD();//si queremos imprimir algo por si no hay registros
         vista.setVisible(true);
         agregarOyente();
         VistaMenuPrincipal.ESCRITORIO.add(vista);
+        
     }
 
     //agregamos los listener
@@ -66,6 +67,8 @@ public class ControladorTipoDocumento implements IController {
         vista.btnEditar.addActionListener(oyenteBtn);
         vista.btnGrabar.addActionListener(oyenteBtn);
         vista.btnNuevo.addActionListener(oyenteBtn);
+        vista.btnLeft.addActionListener(oyenteBtn);
+        vista.btnRight.addActionListener(oyenteBtn);
         vista.tblTipoDocumento.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -74,6 +77,7 @@ public class ControladorTipoDocumento implements IController {
             }
 
         });
+        vista.txtBuscarTipo.addKeyListener(new OyenteTeclado());
     }
 
     @Override
@@ -81,6 +85,32 @@ public class ControladorTipoDocumento implements IController {
         vista.dispose();
     }
 
+    private class OyenteTeclado extends KeyAdapter{
+
+        @Override
+        public void keyReleased(KeyEvent e){
+            if(vista.txtBuscarTipo.getText().isEmpty()){
+                modeloTabla.updateAll();
+                modeloTabla.setOpc(false);
+            }else{
+                modeloTabla.searchSensitve(vista.txtBuscarTipo.getText(),true);
+                modeloTabla.setOpc(true);
+                modeloTabla.setTxtS(vista.txtBuscarTipo.getText());
+            }
+            vista.tblTipoDocumento.updateUI();
+            pintarLabelsBD();
+        }
+        
+    }
+    
+    private void pintarLabelsBD(){
+        vista.lblCntRegistros.setText(String.valueOf(modeloTabla
+                .getPaginador()
+                .getCantidadRegistros()));
+        vista.lblNumPaginas.setText((modeloTabla.getPaginador().getPaginaActual()+1)+
+                "/"+modeloTabla.getPaginador().getCantidadPaginas());
+    }
+    
     private class OyenteBoton implements ActionListener {
 
         @Override
@@ -159,20 +189,23 @@ public class ControladorTipoDocumento implements IController {
                     }
                 }
 
+            } else if(vista.btnLeft == evt.getSource()){
+                modeloTabla.getPaginador().prev();
+                pintarLabelsBD();
+                vista.tblTipoDocumento.updateUI();
+            }else if(vista.btnRight == evt.getSource()){
+                modeloTabla.getPaginador().next();
+                pintarLabelsBD();
+                vista.tblTipoDocumento.updateUI();
             }
         }
 
     }
 
     private void actualizarTabla() {
-        try {
-            modeloTabla.remove();
-            modeloTabla.update();
-        } catch (NotAll ex) {
-        } finally {
-            vista.tblTipoDocumento.updateUI();
-        }
-
+        modeloTabla.remove();
+        modeloTabla.updateAll();
+        vista.tblTipoDocumento.updateUI();
     }
 
     private boolean validar() {

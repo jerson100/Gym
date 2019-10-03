@@ -29,7 +29,9 @@ public class TipoDocumentoDao implements ITipoDocumento {
     private ResultSet rs;
     private PreparedStatement pr;
     private CallableStatement ca;
+    
 
+    
     public TipoDocumentoDao() {}
 
     @Override
@@ -131,12 +133,59 @@ public class TipoDocumentoDao implements ITipoDocumento {
         }
         return tdList;
     }
+    
+    @Override
+    public int allTiposDocumentos(){
+        int all = 0;
+        conexion = ConexionMysql.GetInstance();
+        Connection con = conexion.conectar();
+        try {
+            pr = con.prepareStatement("select count(*) from vTipoDocumento");
+            rs = pr.executeQuery();
+            if(rs.next()){
+                all = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        } finally{
+            cerrarConexion();
+        }
+        return all;
+    }
+    
+    @Override
+    public List<TipoDocumento> ListarCondicion(String txt) throws NotAll {
+        List<TipoDocumento> tdList = new ArrayList<>();
+        conexion = ConexionMysql.GetInstance();
+        Connection con = conexion.conectar();
+        try {
+            String d = "%"+txt+"%";
+            pr = con.prepareStatement("select * from vTipoDocumento where tipo like ?");
+            pr.setString(1, d);
+            rs = pr.executeQuery();
+            if(rs.next()){
+                tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2),rs.getString(3)));
+                while(rs.next()){
+                    tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2),rs.getString(3)));
+                }
+            }else{
+                throw new NotAll("No se encontraron registros de tipos de documentos");
+            }
+        } catch (SQLException e) {
+            throw new NotAll("No se encontraron registros de tipos de documentos: "+e.getMessage());
+        } finally{
+            cerrarConexion();
+        }
+        return tdList;
+    }
+    
+    
 
     private void cerrarConexion() {
         conexion.cerrar();
         if (rs != null) {
             try {
                 rs.close();
+                rs = null;
             } catch (SQLException ex) {
                 Logger.getLogger(TipoDocumentoDao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -144,6 +193,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
         if (pr != null) {
             try {
                 pr.close();
+                pr = null;
             } catch (SQLException ex) {
                 Logger.getLogger(TipoDocumentoDao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -151,11 +201,90 @@ public class TipoDocumentoDao implements ITipoDocumento {
         if (ca != null) {
             try {
                 ca.close();
+                ca = null;
             } catch (SQLException ex) {
                 Logger.getLogger(TipoDocumentoDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
+
+    @Override
+    public List<TipoDocumento> Listar(int i, int f) throws NotAll{
+        List<TipoDocumento> tdList = new ArrayList<>();
+        conexion = ConexionMysql.GetInstance();
+        Connection con = conexion.conectar();
+        try {
+            pr = con.prepareStatement("select * from vTipoDocumento limit ?,?");
+            pr.setInt(1, i);
+            pr.setInt(2, f);
+            rs = pr.executeQuery();
+            if(rs.next()){
+                tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2),rs.getString(3)));
+                while(rs.next()){
+                    tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2),rs.getString(3)));
+                }
+            }else{
+                throw new NotAll("No se encontraron registros");
+            }
+        } catch (SQLException e) {
+            throw new NotAll("No se encontraron registros");
+        } finally{
+            cerrarConexion();
+        }
+        return tdList;
+}
+
+    @Override
+    public int allTiposDocumentosSearch(String txt) {
+        int all = 0;
+        conexion = ConexionMysql.GetInstance();
+        Connection con = conexion.conectar();
+        String like = "%"+txt+"%";
+        try {
+            pr = con.prepareStatement("select count(*) from vTipoDocumento where tipo like ?");
+            pr.setString(1, like);
+            rs = pr.executeQuery();
+            if(rs.next()){
+                all = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally{
+            cerrarConexion();
+        }
+        return all;
+    
+    }
+
+    @Override
+    public List<TipoDocumento> ListarCondicion(String txt, int i, int c) throws NotAll {
+        List<TipoDocumento> tdList = new ArrayList<>();
+        conexion = ConexionMysql.GetInstance();
+        Connection con = conexion.conectar();
+        try {
+            String like = "%"+txt+"%";
+            pr = con.prepareStatement("select * from vTipoDocumento where tipo like ? limit ?,?");
+            pr.setString(1,like);
+            pr.setInt(2, i);
+            pr.setInt(3, c);
+            rs = pr.executeQuery();
+            if(rs.next()){
+                tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2),rs.getString(3)));
+                while(rs.next()){
+                    tdList.add(new TipoDocumento(rs.getInt(1), rs.getString(2),rs.getString(3)));
+                }
+            }else{
+                throw new NotAll("No se encontraron registros");
+            }
+        } catch (SQLException e) {
+            throw new NotAll("No se encontraron registros");
+        } finally{
+            cerrarConexion();
+        }
+        return tdList;
+    }
+
+    
 
     
 
