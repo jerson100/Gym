@@ -91,11 +91,11 @@ public class ControladorTipoDocumento implements IController {
         public void keyReleased(KeyEvent e){
             if(vista.txtBuscarTipo.getText().isEmpty()){
                 modeloTabla.updateAll();
-                modeloTabla.setOpc(false);
+                modeloTabla.setActivoBuscador(false);
             }else{
                 modeloTabla.searchSensitve(vista.txtBuscarTipo.getText(),true);
-                modeloTabla.setOpc(true);
-                modeloTabla.setTxtS(vista.txtBuscarTipo.getText());
+                modeloTabla.setActivoBuscador(true);
+                modeloTabla.setTextoPrevioABuscar(vista.txtBuscarTipo.getText());
             }
             vista.tblTipoDocumento.updateUI();
             pintarLabelsBD();
