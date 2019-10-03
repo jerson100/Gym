@@ -24,7 +24,26 @@ public class ConexionMysql implements IConexionAbstract {
             Class.forName(DRIVER);
             conn = DriverManager.getConnection(URL, USER, PASS);
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error de conexión", JOptionPane.ERROR_MESSAGE);
+            String html = "<html>"
+                    + "<head>"
+                    + "<style>"
+                    + ".c{color:red;text-align:center;}"
+                    + ".gmail{color:blue;text-decoration:underline;}"
+                    + "</style>"
+                    + "</head>"
+                    + "<body>"
+                    + "<h3 class='c'>"
+                    + "No se pudo establecer la conexión con"
+                    + "<br>"
+                    + "la base de datos, contactarse con "
+                    + "<span class='gmail'>juamkoo@gmail.com</span>"
+                    + "<br>"
+                    + "Disculpe las molestias, gracias."
+                    + "</h3>"
+                    + "</body>"
+                    + "</html>";
+            JOptionPane.showMessageDialog(null, html, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
 
     }
@@ -56,6 +75,7 @@ public class ConexionMysql implements IConexionAbstract {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            
         }
     }
 
