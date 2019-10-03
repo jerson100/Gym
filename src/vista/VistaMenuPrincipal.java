@@ -8,6 +8,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
 
     public VistaMenuPrincipal() {
         initComponents();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -19,6 +20,8 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuItemPais = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -30,18 +33,19 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         ESCRITORIOLayout.setHorizontalGroup(
             ESCRITORIOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ESCRITORIOLayout.createSequentialGroup()
-                .addContainerGap(350, Short.MAX_VALUE)
+                .addContainerGap(442, Short.MAX_VALUE)
                 .addComponent(jeHour2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         ESCRITORIOLayout.setVerticalGroup(
             ESCRITORIOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ESCRITORIOLayout.createSequentialGroup()
-                .addContainerGap(370, Short.MAX_VALUE)
+                .addContainerGap(493, Short.MAX_VALUE)
                 .addComponent(jeHour2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/maintenance.png"))); // NOI18N
         jMenu1.setText("File");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -49,9 +53,19 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         mnuItemPais.setText("Pais");
         jMenu1.add(mnuItemPais);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/maintenance.png"))); // NOI18N
+        jMenuItem2.setText("Configuracion");
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/salir.png"))); // NOI18N
+        jMenuItem1.setText("Salir");
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/ayuda.png"))); // NOI18N
+        jMenu2.setText("Help");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuBar1.add(jMenu2);
 
@@ -61,11 +75,11 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ESCRITORIO, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(ESCRITORIO)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ESCRITORIO, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(ESCRITORIO)
         );
 
         pack();
@@ -77,6 +91,8 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private util.JeHour jeHour2;
     public javax.swing.JMenuItem mnuItemPais;
     // End of variables declaration//GEN-END:variables

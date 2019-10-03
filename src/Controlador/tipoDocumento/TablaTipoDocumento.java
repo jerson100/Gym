@@ -41,7 +41,7 @@ public class TablaTipoDocumento extends AbstractTableModel {
         };
     }
 
-    public void remove() {
+    private void remove() {
         listaTipoDocumento.clear();
         listaTipoDocumento = null;
     }
@@ -55,6 +55,12 @@ public class TablaTipoDocumento extends AbstractTableModel {
         } catch (NotAll ex) {
             listaTipoDocumento = new ArrayList<>();
         }
+    }
+    
+    public void restablecerData(){
+        remove();
+        paginador.setPaginaActual(0);
+        updateAll();
     }
 
     public void searchSensitve(String dat, boolean activekeyReleased) {

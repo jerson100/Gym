@@ -2,7 +2,6 @@ package Controlador.tipoDocumento;
 
 import configuracion.App;
 import enumerados.EDaoManager;
-import excepcion.NotAll;
 import excepcion.NotCreate;
 import excepcion.NotDelete;
 import excepcion.NotUpdate;
@@ -42,20 +41,17 @@ public class ControladorTipoDocumento implements IController {
         vista = new VistaTipoDocumento();
         vista.txtBuscarTipo.repintarPlaceHolder();
     }
-    
+
     @Override
     public void open() {
         vista.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         modeloTabla = new TablaTipoDocumento(daoTipoDocumento);
-        System.out.println("dww");
         vista.tblTipoDocumento.setModel(modeloTabla);
         modeloTabla.updateAll();
-        
         pintarLabelsBD();//si queremos imprimir algo por si no hay registros
         vista.setVisible(true);
         agregarOyente();
         VistaMenuPrincipal.ESCRITORIO.add(vista);
-        
     }
 
     //agregamos los listener
@@ -80,35 +76,20 @@ public class ControladorTipoDocumento implements IController {
         vista.txtBuscarTipo.addKeyListener(new OyenteTeclado());
     }
 
-    @Override
-    public void cerrar() {
-        vista.dispose();
-    }
-
-    private class OyenteTeclado extends KeyAdapter{
-
+    private class OyenteTeclado extends KeyAdapter {
         @Override
-        public void keyReleased(KeyEvent e){
-            if(vista.txtBuscarTipo.getText().isEmpty()){
-                modeloTabla.updateAll();
-                modeloTabla.setActivoBuscador(false);
-            }else{
-                modeloTabla.searchSensitve(vista.txtBuscarTipo.getText(),true);
+        public void keyReleased(KeyEvent e) {
+            if (vista.txtBuscarTipo.getText().isEmpty()) {
+                actualizarTabla();
+            } else {
+                modeloTabla.searchSensitve(vista.txtBuscarTipo.getText(), true);
                 modeloTabla.setActivoBuscador(true);
                 modeloTabla.setTextoPrevioABuscar(vista.txtBuscarTipo.getText());
             }
             vista.tblTipoDocumento.updateUI();
             pintarLabelsBD();
         }
-        
-    }
-    
-    private void pintarLabelsBD(){
-        vista.lblCntRegistros.setText(String.valueOf(modeloTabla
-                .getPaginador()
-                .getCantidadRegistros()));
-        vista.lblNumPaginas.setText((modeloTabla.getPaginador().getPaginaActual()+1)+
-                "/"+modeloTabla.getPaginador().getCantidadPaginas());
+
     }
     
     private class OyenteBoton implements ActionListener {
@@ -123,8 +104,10 @@ public class ControladorTipoDocumento implements IController {
                 repintarPlaceHolder();
             } else if (vista.btnGrabar == evt.getSource()) {
                 TipoDocumento tipo = new TipoDocumento(vista.txtTipo.getText().trim(),
-                         vista.txtAbreviatura.getText().trim());
-                if (!validar())return;
+                        vista.txtAbreviatura.getText().trim());
+                if (!validar()) {
+                    return;
+                }
                 String aux = "";
                 try {
                     if (edit) {
@@ -189,23 +172,17 @@ public class ControladorTipoDocumento implements IController {
                     }
                 }
 
-            } else if(vista.btnLeft == evt.getSource()){
+            } else if (vista.btnLeft == evt.getSource()) {
                 modeloTabla.getPaginador().prev();
                 pintarLabelsBD();
                 vista.tblTipoDocumento.updateUI();
-            }else if(vista.btnRight == evt.getSource()){
+            } else if (vista.btnRight == evt.getSource()) {
                 modeloTabla.getPaginador().next();
                 pintarLabelsBD();
                 vista.tblTipoDocumento.updateUI();
             }
         }
 
-    }
-
-    private void actualizarTabla() {
-        modeloTabla.remove();
-        modeloTabla.updateAll();
-        vista.tblTipoDocumento.updateUI();
     }
 
     private boolean validar() {
@@ -226,13 +203,33 @@ public class ControladorTipoDocumento implements IController {
         }
         return true;
     }
+    
+    
+    private void pintarLabelsBD() {
+        vista.lblCntRegistros.setText(String.valueOf(modeloTabla
+                .getPaginador()
+                .getCantidadRegistros()));
+        vista.lblNumPaginas.setText((modeloTabla.getPaginador().getPaginaActual() + 1)
+                + "/" + modeloTabla.getPaginador().getCantidadPaginas());
+    }
+
+    @Override
+    public void cerrar() {
+        vista.dispose();
+    }
+    
+    private void actualizarTabla() {
+        modeloTabla.setActivoBuscador(false);
+        modeloTabla.restablecerData();
+        modeloTabla.updateAll();
+        vista.tblTipoDocumento.updateUI();
+        pintarLabelsBD();
+    }
 
     private void editar() {
-
         vista.txtId.setText(String.valueOf(vista.tblTipoDocumento.getValueAt(vista.tblTipoDocumento.getSelectedRow(), 0)));
         vista.txtTipo.setText(String.valueOf(vista.tblTipoDocumento.getValueAt(vista.tblTipoDocumento.getSelectedRow(), 1)));
         vista.txtAbreviatura.setText(String.valueOf(vista.tblTipoDocumento.getValueAt(vista.tblTipoDocumento.getSelectedRow(), 2)));
-
     }
 
     private void repintarPlaceHolder() {
