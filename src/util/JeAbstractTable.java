@@ -20,7 +20,7 @@ public abstract class JeAbstractTable<T> extends AbstractTableModel {
 
     public JeAbstractTable(ICrud dao) {
         this.daoTypeDocument = dao;
-        int cantidadR = dao.allCount();
+        int cantidadR = dao.cantidadRegistros();
         this.paginator = new JePagination<T>(cantidadR, 10) {
             @Override
             public void updateData() {
@@ -44,9 +44,9 @@ public abstract class JeAbstractTable<T> extends AbstractTableModel {
 
     public void updateAll() {
         try {
-            int cantidadR = daoTypeDocument.allCount();//obtenemos la cantidad de registros en la bd
+            int cantidadR = daoTypeDocument.cantidadRegistros();//obtenemos la cantidad de registros en la bd
             paginator.setCantidadRegistros(cantidadR);
-            list = daoTypeDocument.Listar(paginator.getPaginaActual() * paginator.getRegistrosXPagina(),
+            list = daoTypeDocument.listar(paginator.getPaginaActual() * paginator.getRegistrosXPagina(),
                     paginator.getRegistrosXPagina());
         } catch (NotAll ex) {
             list = new ArrayList<>();
@@ -75,7 +75,7 @@ public abstract class JeAbstractTable<T> extends AbstractTableModel {
         }
         try {
             remove();
-            int cantidaR = daoTypeDocument.allTiposDocumentosSearch(dat);
+            int cantidaR = daoTypeDocument.cantidadRegistrosCondicion(dat);
             //System.out.println("paginator: " + paginator);
             paginator.setCantidadRegistros(cantidaR);
             //System.out.println("paginator: " + paginator);

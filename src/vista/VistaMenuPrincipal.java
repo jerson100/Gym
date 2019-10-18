@@ -19,7 +19,8 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jeHour2 = new util.JeHour();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mnuItemPais = new javax.swing.JMenuItem();
+        mnuItemTipoDocumento = new javax.swing.JMenuItem();
+        mnuItemTipoUsuario = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -49,9 +50,12 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jMenu1.setText("File");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        mnuItemPais.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        mnuItemPais.setText("Pais");
-        jMenu1.add(mnuItemPais);
+        mnuItemTipoDocumento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mnuItemTipoDocumento.setText("Tipo de documento");
+        jMenu1.add(mnuItemTipoDocumento);
+
+        mnuItemTipoUsuario.setText("Tipo de usuario");
+        jMenu1.add(mnuItemTipoUsuario);
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos/maintenance.png"))); // NOI18N
         jMenuItem2.setText("Configuracion");
@@ -94,6 +98,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private util.JeHour jeHour2;
-    public javax.swing.JMenuItem mnuItemPais;
+    public javax.swing.JMenuItem mnuItemTipoDocumento;
+    public javax.swing.JMenuItem mnuItemTipoUsuario;
     // End of variables declaration//GEN-END:variables
 }

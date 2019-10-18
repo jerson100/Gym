@@ -39,7 +39,7 @@ public class Prueba extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         modelo = (DefaultTableModel)tblDatos.getModel();
         dao = DaoManager.getDaoManager(EDaoManager.TIPO_DOCUMENTO_DAO);
-        pg = new JePagination(dao.allCount(), 5) {
+        pg = new JePagination(dao.cantidadRegistros(), 5) {
             @Override
             public void updateData() {try {
                 //en cada actualización que deseas que se realize
@@ -320,13 +320,13 @@ public class Prueba extends javax.swing.JFrame {
         }
 
         public void update() throws NotAll {
-            listaTipoDocumento = daoTipoDocumento.Listar(pg.getPaginaActual()
+            listaTipoDocumento = daoTipoDocumento.listar(pg.getPaginaActual()
                     * pg.getRegistrosXPagina(), pg.getRegistrosXPagina());
         }
 
         public void updateAll() {
             try {
-                listaTipoDocumento = daoTipoDocumento.Listar();
+                listaTipoDocumento = daoTipoDocumento.listar();
             } catch (NotAll ex) {
                 listaTipoDocumento = new ArrayList<>();
             }

@@ -14,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.entidad.TipoDocumento;
 
 /**
@@ -29,15 +27,14 @@ public class TipoDocumentoDao implements ITipoDocumento {
     private ResultSet rs;
     private PreparedStatement pr;
     private CallableStatement ca;
-    
-
+    private Connection con;
     
     public TipoDocumentoDao() {}
 
     @Override
     public void crear(TipoDocumento obj) throws NotCreate {
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         try {
             ca = con.prepareCall("call ps_insert_tipoDocumento(?,?)");
             ca.setString(1, obj.getTipo());
@@ -111,7 +108,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     }
     
     @Override
-    public List<TipoDocumento> Listar() throws NotAll {
+    public List<TipoDocumento> listar() throws NotAll {
         List<TipoDocumento> tdList = new ArrayList<>();
         conexion = ConexionMysql.GetInstance();
         Connection con = conexion.conectar();
@@ -135,7 +132,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     }
     
     @Override
-    public int allCount(){
+    public int cantidadRegistros(){
         int all = 0;
         conexion = ConexionMysql.GetInstance();
         Connection con = conexion.conectar();
@@ -178,38 +175,8 @@ public class TipoDocumentoDao implements ITipoDocumento {
         return tdList;
     }
     
-    
-
-    private void cerrarConexion() {
-        conexion.cerrar();
-        if (rs != null) {
-            try {
-                rs.close();
-                rs = null;
-            } catch (SQLException ex) {
-                Logger.getLogger(TipoDocumentoDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        if (pr != null) {
-            try {
-                pr.close();
-                pr = null;
-            } catch (SQLException ex) {
-                Logger.getLogger(TipoDocumentoDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        if (ca != null) {
-            try {
-                ca.close();
-                ca = null;
-            } catch (SQLException ex) {
-                Logger.getLogger(TipoDocumentoDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
     @Override
-    public List<TipoDocumento> Listar(int i, int f) throws NotAll{
+    public List<TipoDocumento> listar(int i, int f) throws NotAll{
         List<TipoDocumento> tdList = new ArrayList<>();
         conexion = ConexionMysql.GetInstance();
         Connection con = conexion.conectar();
@@ -235,7 +202,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
 }
 
     @Override
-    public int allTiposDocumentosSearch(String txt) {
+    public int cantidadRegistrosCondicion(String txt) {
         int all = 0;
         conexion = ConexionMysql.GetInstance();
         Connection con = conexion.conectar();
@@ -253,7 +220,6 @@ public class TipoDocumentoDao implements ITipoDocumento {
             cerrarConexion();
         }
         return all;
-    
     }
 
     @Override
@@ -285,7 +251,33 @@ public class TipoDocumentoDao implements ITipoDocumento {
     }
 
     
-
+    private void cerrarConexion() {
+        conexion.cerrar();
+        if (rs != null) {
+            try {
+                rs.close();
+                rs = null;
+            } catch (SQLException ex) {}
+        }
+        if (pr != null) {
+            try {
+                pr.close();
+                pr = null;
+            } catch (SQLException ex) {}
+        }
+        if (ca != null) {
+            try {
+                ca.close();
+                ca = null;
+            } catch (SQLException ex) {}
+        }
+        if(con != null){
+            try {
+                con.close();
+                con = null;
+            } catch (SQLException ex) {}
+        }
+    }
     
 
 }

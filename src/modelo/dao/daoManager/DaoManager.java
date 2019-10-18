@@ -33,6 +33,9 @@ public class DaoManager {
                 case TIPO_DOCUMENTO_DAO:
                     crud = new modelo.dao.mysql.TipoDocumentoDao();
                     break;
+                case TIPO_USUARIO_DAO:
+                    crud = new modelo.dao.mysql.TipoUsuarioDao();
+                    break;
             }
             
        }else{

@@ -37,7 +37,7 @@ public class TipoDocumentoDao implements ITipoDocumento{
     }
 
     @Override
-    public List<TipoDocumento> Listar() throws NotAll {
+    public List<TipoDocumento> listar() throws NotAll {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -52,17 +52,17 @@ public class TipoDocumentoDao implements ITipoDocumento{
     }
 
     @Override
-    public int allCount() {
+    public int cantidadRegistros() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<TipoDocumento> Listar(int i, int f) {
+    public List<TipoDocumento> listar(int i, int f) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int allTiposDocumentosSearch(String txt) {
+    public int cantidadRegistrosCondicion(String txt) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
