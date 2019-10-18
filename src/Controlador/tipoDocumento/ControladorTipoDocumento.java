@@ -83,8 +83,8 @@ public class ControladorTipoDocumento implements IController {
                 actualizarTabla();
             } else {
                 modeloTabla.searchSensitve(vista.txtBuscarTipo.getText(), true);
-                modeloTabla.setActivoBuscador(true);
-                modeloTabla.setTextoPrevioABuscar(vista.txtBuscarTipo.getText());
+                modeloTabla.setActiveSearch(true);
+                modeloTabla.setTextPreviousSearch(vista.txtBuscarTipo.getText());
             }
             vista.tblTipoDocumento.updateUI();
             pintarLabelsBD();
@@ -173,11 +173,11 @@ public class ControladorTipoDocumento implements IController {
                 }
 
             } else if (vista.btnLeft == evt.getSource()) {
-                modeloTabla.getPaginador().prev();
+                modeloTabla.getPaginator().prev();
                 pintarLabelsBD();
                 vista.tblTipoDocumento.updateUI();
             } else if (vista.btnRight == evt.getSource()) {
-                modeloTabla.getPaginador().next();
+                modeloTabla.getPaginator().next();
                 pintarLabelsBD();
                 vista.tblTipoDocumento.updateUI();
             }
@@ -207,10 +207,10 @@ public class ControladorTipoDocumento implements IController {
     
     private void pintarLabelsBD() {
         vista.lblCntRegistros.setText(String.valueOf(modeloTabla
-                .getPaginador()
+                .getPaginator()
                 .getCantidadRegistros()));
-        vista.lblNumPaginas.setText((modeloTabla.getPaginador().getPaginaActual() + 1)
-                + "/" + modeloTabla.getPaginador().getCantidadPaginas());
+        vista.lblNumPaginas.setText((modeloTabla.getPaginator().getPaginaActual() + 1)
+                + "/" + modeloTabla.getPaginator().getCantidadPaginas());
     }
 
     @Override
@@ -219,9 +219,9 @@ public class ControladorTipoDocumento implements IController {
     }
     
     private void actualizarTabla() {
-        modeloTabla.setActivoBuscador(false);
+        modeloTabla.setActiveSearch(false);
         modeloTabla.restablecerData();
-        modeloTabla.updateAll();
+        //modeloTabla.updateAll();
         vista.tblTipoDocumento.updateUI();
         pintarLabelsBD();
     }

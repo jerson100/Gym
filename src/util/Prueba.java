@@ -39,7 +39,7 @@ public class Prueba extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         modelo = (DefaultTableModel)tblDatos.getModel();
         dao = DaoManager.getDaoManager(EDaoManager.TIPO_DOCUMENTO_DAO);
-        pg = new JePagination(dao.allTiposDocumentos(), 5) {
+        pg = new JePagination(dao.allCount(), 5) {
             @Override
             public void updateData() {try {
                 //en cada actualización que deseas que se realize

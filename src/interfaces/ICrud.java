@@ -10,6 +10,7 @@ import java.util.List;
 /**
  *
  * @author Jerson
+ * @param <T>
  */
 public interface ICrud<T> {
 
@@ -24,7 +25,8 @@ public interface ICrud<T> {
     List<T> Listar() throws NotAll;
     
     List<T> ListarCondicion(String txt) throws NotAll;
-    int allTiposDocumentos();
+    
+    int allCount();
     
     List<T> Listar(int i,int f) throws NotAll;
     

@@ -52,7 +52,7 @@ public class TipoDocumentoDao implements ITipoDocumento{
     }
 
     @Override
-    public int allTiposDocumentos() {
+    public int allCount() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

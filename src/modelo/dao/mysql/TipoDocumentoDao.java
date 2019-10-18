@@ -135,7 +135,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     }
     
     @Override
-    public int allTiposDocumentos(){
+    public int allCount(){
         int all = 0;
         conexion = ConexionMysql.GetInstance();
         Connection con = conexion.conectar();
