@@ -12,14 +12,14 @@ import javax.swing.table.AbstractTableModel;
  * @param <T>
  */
 public abstract class JeAbstractTable<T> extends AbstractTableModel {
-    private ICrud daoTypeDocument;
+    private ICrud dao;
     private List<T> list;
     private JePagination<T> paginator;
     private boolean activeSearch = false;
     private String textPreviousSearch = "";
 
     public JeAbstractTable(ICrud dao) {
-        this.daoTypeDocument = dao;
+        this.dao = dao;
         int cantidadR = dao.cantidadRegistros();
         this.paginator = new JePagination<T>(cantidadR, 10) {
             @Override
@@ -44,9 +44,9 @@ public abstract class JeAbstractTable<T> extends AbstractTableModel {
 
     public void updateAll() {
         try {
-            int cantidadR = daoTypeDocument.cantidadRegistros();//obtenemos la cantidad de registros en la bd
+            int cantidadR = dao.cantidadRegistros();//obtenemos la cantidad de registros en la bd
             paginator.setCantidadRegistros(cantidadR);
-            list = daoTypeDocument.listar(paginator.getPaginaActual() * paginator.getRegistrosXPagina(),
+            list = dao.listar(paginator.getPaginaActual() * paginator.getRegistrosXPagina(),
                     paginator.getRegistrosXPagina());
         } catch (NotAll ex) {
             list = new ArrayList<>();
@@ -75,11 +75,11 @@ public abstract class JeAbstractTable<T> extends AbstractTableModel {
         }
         try {
             remove();
-            int cantidaR = daoTypeDocument.cantidadRegistrosCondicion(dat);
+            int cantidaR = dao.cantidadRegistrosCondicion(dat);
             //System.out.println("paginator: " + paginator);
             paginator.setCantidadRegistros(cantidaR);
             //System.out.println("paginator: " + paginator);
-            list = daoTypeDocument.ListarCondicion(dat, paginator.getPaginaActual() * paginator.getRegistrosXPagina(),
+            list = dao.ListarCondicion(dat, paginator.getPaginaActual() * paginator.getRegistrosXPagina(),
                     paginator.getRegistrosXPagina());
         } catch (NotAll ex) {
             list = new ArrayList<>();
