@@ -6,12 +6,12 @@ import javax.swing.JMenuItem;
  *
  * @author Jerson
  */
-public class VistaTipoUsuario extends javax.swing.JInternalFrame {
+public class PanelTipoUsuario extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VistaTipoUsuario
      */
-    public VistaTipoUsuario() {
+    public PanelTipoUsuario() {
         initComponents();
         popup.add(new JMenuItem("click"));
         popup.add(new JMenuItem("click2"));

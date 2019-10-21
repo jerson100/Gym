@@ -7,29 +7,27 @@ import excepcion.NotDelete;
 import excepcion.NotUpdate;
 import interfaces.IController;
 import interfaces.ICrud;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JInternalFrame;
+import javax.swing.GroupLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import modelo.dao.daoManager.DaoManager;
 import modelo.entidad.TipoUsuario;
 import util.validator.JeValidatorLetter;
-import vista.VistaMenuPrincipal;
-import vista.VistaTipoUsuario;
+import vista.paneles.PanelTipoUsuario;
 
 /**
  *
  * @author Jerson
  */
-public class ControladorTipoUsuario implements IController{
+public class ControladorTipoUsuario implements IController {
+
     public ICrud daoTipoUsuario;
-    private VistaTipoUsuario vista;
+    private PanelTipoUsuario vista;
     private TablaTipoUsuario modeloTabla;
-    private boolean edit;
 
     public ControladorTipoUsuario() {
         init();
@@ -37,50 +35,58 @@ public class ControladorTipoUsuario implements IController{
 
     private void init() {
         daoTipoUsuario = DaoManager.getDaoManager(EDaoManager.TIPO_USUARIO_DAO);
-        vista = new VistaTipoUsuario();
+        vista = new PanelTipoUsuario();
         vista.txtBuscarTipo.repintarPlaceHolder();
+    }
+
+    public void open(JPanel pnlPrincipal) {
+        open();
+        GroupLayout pnlPrincipalLayout = (GroupLayout) pnlPrincipal.getLayout();
+        pnlPrincipal.removeAll();//removemos todos los componentes que contiene
+
+        pnlPrincipalLayout.setHorizontalGroup(
+                pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(vista, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+        );
+        pnlPrincipalLayout.setVerticalGroup(
+                pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(vista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnlPrincipal.updateUI();
     }
 
     @Override
     public void open() {
-        vista.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         modeloTabla = new TablaTipoUsuario(daoTipoUsuario);
-        vista.tblTipoDocumento.setModel(modeloTabla);
+        vista.tblTipoUsuario.setModel(modeloTabla);
         modeloTabla.updateAll();
         pintarLabelsBD();//si queremos imprimir algo por si no hay registros
         vista.setVisible(true);
         agregarOyente();
-        //VistaMenuPrincipal.ESCRITORIO.add(vista);
     }
 
     //agregamos los listener
     private void agregarOyente() {
         OyenteBoton oyenteBtn = new OyenteBoton();
-        vista.btnSalir.addActionListener(oyenteBtn);
-        vista.btnBorrar.addActionListener(oyenteBtn);
-        vista.btnCancelar.addActionListener(oyenteBtn);
-        vista.btnEditar.addActionListener(oyenteBtn);
-        vista.btnGrabar.addActionListener(oyenteBtn);
-        vista.btnNuevo.addActionListener(oyenteBtn);
-        vista.btnLeft.addActionListener(oyenteBtn);
-        vista.btnRight.addActionListener(oyenteBtn);
-        vista.tblTipoDocumento.addMouseListener(new MouseAdapter() {
+        vista.btnLeft.addMouseListener(oyenteBtn);
+        vista.btnRight.addMouseListener(oyenteBtn);
+        vista.btnAgregar.addMouseListener(oyenteBtn);
+        vista.btnEliminar.addMouseListener(oyenteBtn);
+        vista.btnActualizar.addMouseListener(oyenteBtn);
+        vista.tblTipoUsuario.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                /*if(e.getModifiers() == 4){//si se hace click derecho
-                    vista.popup.show(e.getComponent(), e.getX(), e.getY());
-                }else{*/
-                    if(e.getModifiers()==16){//click derecho
-                        editar();
-                        habilitaControles(false);
-                    }
-                /*}*/
+                editar();
+                habilitaControles(false);
             }
+
         });
         vista.txtBuscarTipo.addKeyListener(new OyenteTeclado());
     }
 
     private class OyenteTeclado extends KeyAdapter {
+
         @Override
         public void keyReleased(KeyEvent e) {
             if (vista.txtBuscarTipo.getText().isEmpty()) {
@@ -90,119 +96,156 @@ public class ControladorTipoUsuario implements IController{
                 modeloTabla.setActiveSearch(true);
                 modeloTabla.setTextPreviousSearch(vista.txtBuscarTipo.getText());
             }
-            vista.tblTipoDocumento.updateUI();
+            vista.tblTipoUsuario.updateUI();
             pintarLabelsBD();
         }
+
     }
-    
-    private class OyenteBoton implements ActionListener {
+
+    private class OyenteBoton extends MouseAdapter {
 
         @Override
-        public void actionPerformed(ActionEvent evt) {
-            if (vista.btnSalir == evt.getSource()) {
-                cerrar();
-            } else if (vista.btnNuevo == evt.getSource()) {
-                habilitaControles(true);
-                limpiarJtextFiel();
-                repintarPlaceHolder();
-            } else if (vista.btnGrabar == evt.getSource()) {
-                TipoUsuario tipo = new TipoUsuario();
-                tipo.setTipo(vista.txtTipo.getText().trim().toLowerCase());
-                if (!validar()) {
-                    return;
-                }
-                String aux = "";
-                try {
-                    if (edit) {
-                        tipo.setIdTipoUsuario(Integer.parseInt(vista.txtId.getText()));
-                        daoTipoUsuario.actualizar(tipo);
-                        aux = "Registro Actualizado";
-                    } else {
-                        daoTipoUsuario.crear(tipo);
-                        aux = "Registro Agregado";
-                    }
-                    actualizarTabla();
-                    limpiarJtextFiel();
-                    repintarPlaceHolder();
-                } catch (NotUpdate | NotCreate ex) {
-                    aux = ex.getMessage();
-                } finally {
-                    JOptionPane.showMessageDialog(vista, aux,
-                            "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
-                }
-                habilitaControles(false);
-            } else if (vista.btnCancelar == evt.getSource()) {
-                habilitaControles(false);
-                limpiarJtextFiel();
-                repintarPlaceHolder();
-            } else if (vista.btnEditar == evt.getSource()) {
-                if (vista.tblTipoDocumento.getSelectedRow() == -1) {
-                    JOptionPane.showMessageDialog(vista,
-                            "Seleccione una fila de la tabla para poder editarlo");
-                } else {
-                    habilitaControles(true);
-                    edit = true;
-                    editar();
-                    repintarTextoNormal();
-                }
-            } else if (vista.btnBorrar == evt.getSource()) {
+        public void mouseClicked(MouseEvent evt) {
 
-                if (!vista.txtId.getText().isEmpty()) {
+            if (vista.btnAgregar == evt.getSource()) {
 
-                    String aux = "";
+                agregarTipoUsuario();
 
-                    int opc = JOptionPane.showConfirmDialog(vista,
-                            "Seguro que desea elimnar el registro?",
-                            "Precaución",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE);
+            } else if (vista.btnActualizar == evt.getSource()) {
 
-                    if (opc != JOptionPane.YES_OPTION) {
-                        return;
-                    }
+                actualizarTipoUsuario();
 
-                    try {
-                        daoTipoUsuario.eliminar(Integer.parseInt(vista.txtId.getText()));
-                        aux = "Registro eliminado";
-                        actualizarTabla();
-                        limpiarJtextFiel();
-                        repintarPlaceHolder();
-                    } catch (NotDelete ex) {
-                        aux = ex.getMessage();
-                    } finally {
-                        JOptionPane.showMessageDialog(vista, aux,
-                                "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                }
+            } else if (vista.btnEliminar == evt.getSource()) {
+
+                eliminarTipoUsuario();
 
             } else if (vista.btnLeft == evt.getSource()) {
                 modeloTabla.getPaginator().prev();
                 pintarLabelsBD();
-                vista.tblTipoDocumento.updateUI();
+                vista.tblTipoUsuario.updateUI();
             } else if (vista.btnRight == evt.getSource()) {
                 modeloTabla.getPaginator().next();
                 pintarLabelsBD();
-                vista.tblTipoDocumento.updateUI();
+                vista.tblTipoUsuario.updateUI();
             }
+        }
+
+        private void agregarTipoUsuario() {
+            //obtenemos los datos de las cajas de texto
+            String tipo = vista.txtTipo_agregar.getText();
+
+            if (validar(tipo)) {
+
+                String msg = "";
+                TipoUsuario tu = new TipoUsuario(tipo);
+
+                try {
+                    daoTipoUsuario.crear(tu);
+                    msg = "Registro agregado satisfactoriamente";
+                    limpiarJtextFiel();
+                    repintarPlaceHolder();
+                    actualizarTabla();
+                } catch (NotCreate ex) {
+                    msg = ex.getMessage();
+                } finally {
+                    JOptionPane.showMessageDialog(null, msg, "Informe",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            }
+        }
+
+        private void actualizarTipoUsuario() {
+
+            String msg = "";
+
+            if (!vista.txtId_actualizar.getText().isEmpty()) {
+
+                int id = Integer.parseInt(vista.txtId_actualizar.getText());
+                String tipo = vista.txtTipo_actualizar.getText();
+
+                if (validar(tipo)) {
+
+                    TipoUsuario tu = new TipoUsuario(id,tipo);
+
+                    try {
+                        daoTipoUsuario.actualizar(tu);
+                        msg = "Registro actualizado satisfactoriamente";
+                        limpiarJtextFiel();
+                        repintarPlaceHolder();
+                        actualizarTabla();
+                    } catch (NotUpdate ex) {
+                        msg = ex.getMessage();
+                    }
+                } else {
+                    return;
+                }
+
+            } else {
+
+                msg = "Seleccione en la pestaña principal el regiStro a modificar ♥";
+
+            }
+
+            JOptionPane.showMessageDialog(null, msg, "Informe",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+        private void eliminarTipoUsuario() {
+
+            String msg = "";
+
+            if (!vista.txtId_eliminar.getText().isEmpty()) {
+
+                int opc = JOptionPane.showConfirmDialog(vista,
+                        "Seguro que desea eliminar el registro?",
+                        "Precaución",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+
+                if (opc != JOptionPane.YES_OPTION) {
+                    return;
+                }
+
+                try {
+                    daoTipoUsuario.eliminar(Integer.parseInt(vista.txtId_eliminar.getText()));
+                    msg = "Registro eliminado satisfactoriamente";
+                    limpiarJtextFiel();
+                    repintarPlaceHolder();
+                    actualizarTabla();
+                } catch (NotDelete ex) {
+                    msg = ex.getMessage();
+                }
+
+            } else {
+
+                msg = "Seleccione en la pestaña principal el regiStro a modificar ♥";
+
+            }
+
+            JOptionPane.showMessageDialog(vista, msg,
+                    "Informe", JOptionPane.INFORMATION_MESSAGE);
+
         }
 
     }
 
-    private boolean validar() {
+    private boolean validar(String jtxtTipo) {
         String msg = "";
-        if (!JeValidatorLetter.isLetter(vista.txtTipo.getText())) {
-            msg = "El tipo de documento no es válido, solo se admiten letras";
-        } else if (vista.txtTipo.getText().length() > App.MAX_NOMBRE_TIPODOCUMENTO) {
-            msg = "El tipo de documento solo debe contener menos de: " + App.MAX_NOMBRE_TIPODOCUMENTO;
+        if (!JeValidatorLetter.isLetter(jtxtTipo)) {
+            msg = "El tipo de usuario no es válido, solo se admiten letras";
+        } else if (jtxtTipo.length() > App.MAX_NOMBRE_TIPOUSUARIO) {
+            msg = "El tipo de usuario solo debe contener menos de: " + App.MAX_NOMBRE_TIPOUSUARIO;
         }
+
         if (!msg.isEmpty()) {
             JOptionPane.showMessageDialog(vista, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
     }
-    
-    
+
     private void pintarLabelsBD() {
         vista.lblCntRegistros.setText(String.valueOf(modeloTabla
                 .getPaginator()
@@ -213,30 +256,34 @@ public class ControladorTipoUsuario implements IController{
 
     @Override
     public void cerrar() {
-        vista.dispose();
     }
-    
+
     private void actualizarTabla() {
         modeloTabla.setActiveSearch(false);
         modeloTabla.restablecerData();
-        //modeloTabla.updateAll();
-        vista.tblTipoDocumento.updateUI();
+        vista.tblTipoUsuario.updateUI();
         pintarLabelsBD();
     }
 
+    //debemos cargar la info a los jtextField para poder actualizar el registro y tmb el de eliminar
     private void editar() {
-        vista.txtId.setText(String.valueOf(vista.tblTipoDocumento.getValueAt(vista.tblTipoDocumento.getSelectedRow(), 0)));
-        vista.txtTipo.setText(String.valueOf(vista.tblTipoDocumento.getValueAt(vista.tblTipoDocumento.getSelectedRow(), 1)));
+        vista.txtId_eliminar.setText(String.valueOf(vista.tblTipoUsuario.getValueAt(vista.tblTipoUsuario.getSelectedRow(), 0)));
+        vista.txtId_actualizar.setText(String.valueOf(vista.tblTipoUsuario.getValueAt(vista.tblTipoUsuario.getSelectedRow(), 0)));
+        vista.txtTipo_actualizar.setText(String.valueOf(vista.tblTipoUsuario.getValueAt(vista.tblTipoUsuario.getSelectedRow(), 1)));
+
     }
 
     private void repintarPlaceHolder() {
-        vista.txtId.repintarPlaceHolder();
-        vista.txtTipo.repintarPlaceHolder();
+        vista.txtBuscarTipo.repintarPlaceHolder();
+        vista.txtTipo_agregar.repintarPlaceHolder();
+        vista.txtTipo_actualizar.repintarPlaceHolder();
+        vista.txtId_eliminar.repintarPlaceHolder();
+        vista.txtId_actualizar.repintarPlaceHolder();
     }
 
     private void repintarTextoNormal() {
-        vista.txtId.repintarTextoNormal();
-        vista.txtTipo.repintarTextoNormal();
+        vista.txtId_actualizar.repintarTextoNormal();
+        vista.txtTipo_agregar.repintarTextoNormal();
     }
 
     @Override
@@ -245,19 +292,15 @@ public class ControladorTipoUsuario implements IController{
 
     @Override
     public void habilitaControles(boolean opc) {
-        vista.txtTipo.setEnabled(opc);
-        vista.btnBorrar.setEnabled(!opc);
-        vista.btnCancelar.setEnabled(opc);
-        vista.btnEditar.setEnabled(!opc);
-        vista.btnGrabar.setEnabled(opc);
-        vista.btnNuevo.setEnabled(!opc);
-        vista.btnSalir.setEnabled(opc);
-        edit = false;
     }
 
     @Override
     public void limpiarJtextFiel() {
-        vista.txtTipo.setText("");
-        vista.txtId.setText("");
+        vista.txtBuscarTipo.setText("");
+        vista.txtTipo_agregar.setText("");
+        vista.txtTipo_actualizar.setText("");
+        vista.txtId_eliminar.setText("");
+        vista.txtId_actualizar.setText("");
     }
+
 }

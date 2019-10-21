@@ -28,9 +28,9 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         myButton1 = new util.MyButton();
         btnTipoDocumento = new util.MyButton();
         myButton3 = new util.MyButton();
-        myButton4 = new util.MyButton();
+        btnTipoUsurio = new util.MyButton();
         myButton5 = new util.MyButton();
-        myButton6 = new util.MyButton();
+        btnSalir = new util.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,20 +102,20 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         myButton3.setColorNormal(Colors.COLOR_AMARRILLO);
         myButton3.setFocusPainted(false);
 
-        myButton4.setText("Tipo de usuario");
-        myButton4.setColorHover(Colors.COLOR_AMARRILLO_ALT);
-        myButton4.setColorNormal(Colors.COLOR_AMARRILLO);
-        myButton4.setFocusPainted(false);
+        btnTipoUsurio.setText("Tipo de usuario");
+        btnTipoUsurio.setColorHover(Colors.COLOR_AMARRILLO_ALT);
+        btnTipoUsurio.setColorNormal(Colors.COLOR_AMARRILLO);
+        btnTipoUsurio.setFocusPainted(false);
 
         myButton5.setText("myButton1");
         myButton5.setColorHover(Colors.COLOR_AMARRILLO_ALT);
         myButton5.setColorNormal(Colors.COLOR_AMARRILLO);
         myButton5.setFocusPainted(false);
 
-        myButton6.setText("myButton1");
-        myButton6.setColorHover(Colors.COLOR_AMARRILLO_ALT);
-        myButton6.setColorNormal(Colors.COLOR_AMARRILLO);
-        myButton6.setFocusPainted(false);
+        btnSalir.setText("Salir");
+        btnSalir.setColorHover(Colors.COLOR_AMARRILLO_ALT);
+        btnSalir.setColorNormal(Colors.COLOR_AMARRILLO);
+        btnSalir.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,10 +123,10 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnTipoDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
             .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(btnTipoUsurio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,13 +136,13 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTipoUsurio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -192,7 +192,9 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public util.MyButton btnSalir;
     public util.MyButton btnTipoDocumento;
+    public util.MyButton btnTipoUsurio;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -200,9 +202,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     private util.JeHour jeHour1;
     private util.MyButton myButton1;
     public util.MyButton myButton3;
-    private util.MyButton myButton4;
     private util.MyButton myButton5;
-    private util.MyButton myButton6;
     private javax.swing.JPanel pnlNavegacion;
     public javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables

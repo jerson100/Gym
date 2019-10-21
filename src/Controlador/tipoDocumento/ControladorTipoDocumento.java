@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import modelo.dao.daoManager.DaoManager;
 import modelo.entidad.TipoDocumento;
 import util.validator.JeValidatorLetter;
-import vista.tipoDocumento.PanelTipoDocumento;
+import vista.paneles.PanelTipoDocumento;
 
 /**
  *

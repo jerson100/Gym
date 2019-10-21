@@ -9,6 +9,18 @@ public class TipoUsuario {
     private String tipo;
     private byte estado;
 
+    public TipoUsuario(int idTipoUsuario, String tipo) {
+        this.idTipoUsuario = idTipoUsuario;
+        this.tipo = tipo;
+    }
+
+    public TipoUsuario(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public TipoUsuario() {
+    }
+    
     public int getIdTipoUsuario() {
         return idTipoUsuario;
     }

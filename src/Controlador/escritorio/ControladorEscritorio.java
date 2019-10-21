@@ -1,6 +1,7 @@
 package Controlador.escritorio;
 
 import Controlador.tipoDocumento.ControladorTipoDocumento;
+import Controlador.tipoUsuario.ControladorTipoUsuario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
@@ -30,8 +31,8 @@ public final class ControladorEscritorio {
     private void addOyente(){
         OyenteBotton oyenteBtn = new OyenteBotton();
         vista.btnTipoDocumento.addMouseListener(oyenteBtn);
-        /*vista.mnuItemTipoDocumento.addMouseListener(oyenteBtn);
-        vista.mnuItemTipoUsuario.addMouseListener(oyenteBtn);*/
+        vista.btnTipoUsurio.addMouseListener(oyenteBtn);
+        vista.btnSalir.addMouseListener(oyenteBtn);
     }
     
     private class OyenteBotton extends MouseAdapter{
@@ -41,14 +42,12 @@ public final class ControladorEscritorio {
             if(e.getSource()==vista.btnTipoDocumento){
                 ControladorTipoDocumento controladorTipoD = new ControladorTipoDocumento();
                 controladorTipoD.open(vista.pnlPrincipal);
+            }else if(e.getSource()==vista.btnTipoUsurio){
+                ControladorTipoUsuario controladorTU = new ControladorTipoUsuario();
+                controladorTU.open(vista.pnlPrincipal);
+            }else if(e.getSource()==vista.btnSalir){
+                System.exit(0);
             }
-            /*if(e.getSource()==vista.mnuItemTipoDocumento){
-                ControladorTipoDocumento controladorTipoD = new ControladorTipoDocumento();
-                controladorTipoD.open();
-            }else if(e.getSource()==vista.mnuItemTipoUsuario){
-                ControladorTipoUsuario controladorTipoU = new ControladorTipoUsuario();
-                controladorTipoU.open();
-            }*/
         }
 
     }

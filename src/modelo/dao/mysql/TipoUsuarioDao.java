@@ -93,7 +93,7 @@ public class TipoUsuarioDao implements ITipoUsuario {
         conexion = ConexionMysql.GetInstance();
         con = conexion.conectar();
         try {
-            ca = con.prepareCall("call ps_delete_tipoUsuario(?)");
+            ca = con.prepareCall("call sp_delete_tipoUsuario(?)");
             ca.setInt(1, id);
             if (ca.executeUpdate() == 0) {
                 throw new NotDelete("No se pudo eliminar el tipo de usuario");
