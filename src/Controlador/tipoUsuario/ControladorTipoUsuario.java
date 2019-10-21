@@ -50,7 +50,7 @@ public class ControladorTipoUsuario implements IController{
         pintarLabelsBD();//si queremos imprimir algo por si no hay registros
         vista.setVisible(true);
         agregarOyente();
-        VistaMenuPrincipal.ESCRITORIO.add(vista);
+        //VistaMenuPrincipal.ESCRITORIO.add(vista);
     }
 
     //agregamos los listener
