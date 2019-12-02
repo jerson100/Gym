@@ -86,6 +86,16 @@ public abstract class JeAbstractTable<T> extends AbstractTableModel {
         }
     }
 
+    /**
+     *  Este método nos permite obtener la cantidad de columnas de la tabla
+     *  @return Int 
+     **/
+    
+    @Override
+    public abstract int getColumnCount();
+    
+    
+
     public boolean isActiveSearch() {
         return activeSearch;
     }

@@ -1,10 +1,8 @@
 package modelo.dao.daoManager;
 
-import conexionMysql.ConexionMysql;
-import conexionOracle.ConexionOracle;
 import enumerados.EDaoManager;
-import interfaces.IConexionAbstract;
 import interfaces.ICrud;
+import modelo.dao.mysql.PaisDao;
 
 /**
  *
@@ -36,9 +34,12 @@ public class DaoManager {
                 case TIPO_USUARIO_DAO:
                     crud = new modelo.dao.mysql.TipoUsuarioDao();
                     break;
+                case PAIS:
+                    crud = new PaisDao();
+                    break;
             }
             
-       }else{
+       }/*else{
         
             switch(dao){
                 case TIPO_DOCUMENTO_DAO:
@@ -46,7 +47,7 @@ public class DaoManager {
                     break;
             }
         
-        }
+        }*/
         
         return crud;
         

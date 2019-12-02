@@ -53,7 +53,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     public TipoDocumento buscar(int id) throws NotRead {
         TipoDocumento td = null;
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         try {
             pr = con.prepareStatement("select * from vTipoDocumento where idTipoDocumento = ?");
             pr.setInt(1, id);
@@ -74,7 +74,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     @Override
     public void actualizar(TipoDocumento obj) throws NotUpdate {
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         try {
             ca = con.prepareCall("call ps_update_tipoDocumento(?,?,?)");
             ca.setInt(1, obj.getIdTipoDocumento());
@@ -93,7 +93,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     @Override
     public void eliminar(int id) throws NotDelete {
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         try {
             ca = con.prepareCall("call ps_delete_tipoDocumento(?)");
             ca.setInt(1, id);
@@ -111,7 +111,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     public List<TipoDocumento> listar() throws NotAll {
         List<TipoDocumento> tdList = new ArrayList<>();
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         try {
             pr = con.prepareStatement("select * from vTipoDocumento");
             rs = pr.executeQuery();
@@ -135,7 +135,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     public int cantidadRegistros(){
         int all = 0;
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         try {
             pr = con.prepareStatement("select count(*) from vTipoDocumento");
             rs = pr.executeQuery();
@@ -153,7 +153,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     public List<TipoDocumento> ListarCondicion(String txt) throws NotAll {
         List<TipoDocumento> tdList = new ArrayList<>();
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         try {
             String d = "%"+txt+"%";
             pr = con.prepareStatement("select * from vTipoDocumento where tipo like ?");
@@ -179,7 +179,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     public List<TipoDocumento> listar(int i, int f) throws NotAll{
         List<TipoDocumento> tdList = new ArrayList<>();
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         try {
             pr = con.prepareStatement("select * from vTipoDocumento limit ?,?");
             pr.setInt(1, i);
@@ -205,7 +205,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     public int cantidadRegistrosCondicion(String txt) {
         int all = 0;
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         String like = "%"+txt+"%";
         try {
             pr = con.prepareStatement("select count(*) from vTipoDocumento where tipo like ?");
@@ -226,7 +226,7 @@ public class TipoDocumentoDao implements ITipoDocumento {
     public List<TipoDocumento> ListarCondicion(String txt, int i, int c) throws NotAll {
         List<TipoDocumento> tdList = new ArrayList<>();
         conexion = ConexionMysql.GetInstance();
-        Connection con = conexion.conectar();
+        con = conexion.conectar();
         try {
             String like = "%"+txt+"%";
             pr = con.prepareStatement("select * from vTipoDocumento where tipo like ? limit ?,?");
