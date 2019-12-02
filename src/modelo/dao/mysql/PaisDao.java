@@ -12,7 +12,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.entidad.Pais;
 
 /**
@@ -73,22 +76,121 @@ public class PaisDao implements IPais {
 
     @Override
     public int cantidadRegistros() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int count = 0;
+        try {
+            conexion = ConexionMysql.GetInstance();
+            con = conexion.conectar();
+            pr = con.prepareStatement("select count(idPais) from vpais");
+            rs = pr.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally{
+            cerrarConexion();
+        }
+        return count;
     }
 
     @Override
     public List<Pais> listar(int i, int f) throws NotAll {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Pais> list = null;
+        try {
+            
+            conexion = ConexionMysql.GetInstance();
+            con = conexion.conectar();
+            pr = con.prepareStatement("select * from vpais limit ?,?");
+            pr.setInt(1, i);
+            pr.setInt(2, f);
+            
+            rs = pr.executeQuery();
+            if(rs.next()){
+                list = new ArrayList<>();
+                Pais p = new Pais();
+                p.setIdPais(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+                list.add(p);
+                while(rs.next()){
+                    p = new Pais();
+                    p.setIdPais(rs.getInt(1));
+                    p.setNombre(rs.getString(2));
+                    list.add(p);
+                }
+            }else{
+                throw new NotAll("No se encontraron países disponibles");
+            }
+            
+        } catch (SQLException e) {
+            throw new NotAll("No se encontraron países disponibles");
+        } finally{
+            cerrarConexion();
+        }
+        
+        return list;
+        
     }
 
     @Override
     public int cantidadRegistrosCondicion(String txt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        int count = 0;
+        try {
+            
+            conexion = ConexionMysql.GetInstance();
+            con = conexion.conectar();
+            pr = con.prepareStatement("select count(idPais) from vpais where nombre like ?");
+            pr.setString(1, "%"+txt+"%");
+            
+            rs = pr.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        } finally{
+            cerrarConexion();
+        }
+        
+        return count;
+        
     }
 
     @Override
-    public List<Pais> ListarCondicion(String like, int i, int c) throws NotAll {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Pais> ListarCondicion(String like, int i, int f) throws NotAll {
+        List<Pais> list = null;
+        try {
+            
+            conexion = ConexionMysql.GetInstance();
+            con = conexion.conectar();
+            pr = con.prepareStatement("select * from vpais where nombre like ? limit ?,?");
+            pr.setString(1, "%"+like+"%");
+            pr.setInt(2, i);
+            pr.setInt(3, f);
+            
+            rs = pr.executeQuery();
+            if(rs.next()){
+                list = new ArrayList<>();
+                Pais p = new Pais();
+                p.setIdPais(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+                list.add(p);
+                while(rs.next()){
+                    p = new Pais();
+                    p.setIdPais(rs.getInt(1));
+                    p.setNombre(rs.getString(2));
+                    list.add(p);
+                }
+            }else{
+                throw new NotAll("No se encontraron países disponibles");
+            }
+            
+        } catch (SQLException e) {
+            throw new NotAll("No se encontraron países disponibles");
+        } finally{
+            cerrarConexion();
+        }
+        
+        return list;
     }
     
     private void cerrarConexion() {

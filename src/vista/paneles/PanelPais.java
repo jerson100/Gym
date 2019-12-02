@@ -44,7 +44,7 @@ public class PanelPais extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         txtActualiza_pais = new util.JeTextPlaceHolder();
         jLabel11 = new javax.swing.JLabel();
-        txtIdPais = new util.JeTextPlaceHolder();
+        txtActualiza_IdPais = new util.JeTextPlaceHolder();
         jLabel13 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btnEliminar = new util.MyButton();
@@ -102,6 +102,7 @@ public class PanelPais extends javax.swing.JPanel {
             }
         });
         tblPais.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblPais.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tblPais);
 
         jLabel6.setText("Páginas:");
@@ -269,10 +270,10 @@ public class PanelPais extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("País:");
 
-        txtIdPais.setEnabled(false);
-        txtIdPais.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtIdPais.setName(""); // NOI18N
-        txtIdPais.setTextoPlaceHolder("Ingrese el id");
+        txtActualiza_IdPais.setEnabled(false);
+        txtActualiza_IdPais.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtActualiza_IdPais.setName(""); // NOI18N
+        txtActualiza_IdPais.setTextoPlaceHolder("Ingrese el id");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -286,7 +287,7 @@ public class PanelPais extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtActualiza_pais, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                    .addComponent(txtIdPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtActualiza_IdPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -295,7 +296,7 @@ public class PanelPais extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtActualiza_IdPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtActualiza_pais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -453,10 +454,10 @@ public class PanelPais extends javax.swing.JPanel {
     public javax.swing.JLabel lblCntRegistros;
     public javax.swing.JLabel lblNumPaginas;
     public javax.swing.JTable tblPais;
+    public util.JeTextPlaceHolder txtActualiza_IdPais;
     public util.JeTextPlaceHolder txtActualiza_pais;
     public util.JeTextPlaceHolder txtAgregar_Pais;
     public util.JeTextPlaceHolder txtBuscarPais;
     public util.JeTextPlaceHolder txtEliminar_IdPais;
-    public util.JeTextPlaceHolder txtIdPais;
     // End of variables declaration//GEN-END:variables
 }

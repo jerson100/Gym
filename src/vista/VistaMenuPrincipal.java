@@ -25,7 +25,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlNavegacion = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        myButton1 = new util.MyButton();
+        btnPais = new util.MyButton();
         btnTipoDocumento = new util.MyButton();
         myButton3 = new util.MyButton();
         btnTipoUsurio = new util.MyButton();
@@ -87,10 +87,10 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBackground(Colors.COLOR_FONDO);
 
-        myButton1.setText("myButton1");
-        myButton1.setColorHover(Colors.COLOR_AMARRILLO_ALT);
-        myButton1.setColorNormal(Colors.COLOR_AMARRILLO);
-        myButton1.setFocusPainted(false);
+        btnPais.setText("País");
+        btnPais.setColorHover(Colors.COLOR_AMARRILLO_ALT);
+        btnPais.setColorNormal(Colors.COLOR_AMARRILLO);
+        btnPais.setFocusPainted(false);
 
         btnTipoDocumento.setText("Tipo documento");
         btnTipoDocumento.setColorHover(Colors.COLOR_AMARRILLO_ALT);
@@ -124,7 +124,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
             .addComponent(btnTipoDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
             .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(btnTipoUsurio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(btnPais, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -138,7 +138,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTipoUsurio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -192,6 +192,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public util.MyButton btnPais;
     public util.MyButton btnSalir;
     public util.MyButton btnTipoDocumento;
     public util.MyButton btnTipoUsurio;
@@ -200,7 +201,6 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private util.JeHour jeHour1;
-    private util.MyButton myButton1;
     public util.MyButton myButton3;
     private util.MyButton myButton5;
     private javax.swing.JPanel pnlNavegacion;

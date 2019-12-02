@@ -1,5 +1,6 @@
 package Controlador.escritorio;
 
+import Controlador.pais.ControladorPais;
 import Controlador.tipoDocumento.ControladorTipoDocumento;
 import Controlador.tipoUsuario.ControladorTipoUsuario;
 import java.awt.event.MouseAdapter;
@@ -33,6 +34,7 @@ public final class ControladorEscritorio {
         vista.btnTipoDocumento.addMouseListener(oyenteBtn);
         vista.btnTipoUsurio.addMouseListener(oyenteBtn);
         vista.btnSalir.addMouseListener(oyenteBtn);
+        vista.btnPais.addMouseListener(oyenteBtn);
     }
     
     private class OyenteBotton extends MouseAdapter{
@@ -45,6 +47,9 @@ public final class ControladorEscritorio {
             }else if(e.getSource()==vista.btnTipoUsurio){
                 ControladorTipoUsuario controladorTU = new ControladorTipoUsuario();
                 controladorTU.open(vista.pnlPrincipal);
+            }else if(e.getSource()==vista.btnPais){
+                ControladorPais controlador = new ControladorPais();
+                controlador.open(vista.pnlPrincipal);
             }else if(e.getSource()==vista.btnSalir){
                 System.exit(0);
             }
